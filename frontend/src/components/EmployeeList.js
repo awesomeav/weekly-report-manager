@@ -15,6 +15,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
+import Serach from './Serach'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -51,7 +52,9 @@ const EmployeeList = () => {
     // }
     dispatch(listEmployees())
   }, [dispatch])
-
+ 
+  
+  
   const profileHandler = (id) => {
     navigate(`/employee/${id}`)
   }
@@ -68,10 +71,14 @@ const EmployeeList = () => {
     }
   }
 
+  
+
   return (
     <>
       <p>p</p>
       <p>p</p>
+      <Serach/>
+      
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 200 }} aria-label='customized table'>
           <TableHead>
