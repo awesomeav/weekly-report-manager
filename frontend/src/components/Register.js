@@ -94,6 +94,16 @@ const Signup = ({ history }) => {
             />
           </div>
 
+          <div className='password'>
+            
+            <label for="cars">   Choose a roles:</label>
+          
+         <select id="roles">
+         <option value="default">   </option>
+         <option value="webd">Web developer</option>
+         <option value="automation">Automation </option>
+         </select>
+          </div>
           <div>
             <button className='submit' onClick={signupHandler}>
               Signup
