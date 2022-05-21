@@ -13,6 +13,15 @@ import {
   employeeListReducer,
 } from './reducers/userReducers'
 
+import {
+  createReportReducer,
+  getReportDetailsReducer,
+  listReportsByEmployeeReducer,
+  updateReportReducer,
+  adminUpdateReportReducer,
+  deleteReportReducer,
+} from './reducers/reportReducers'
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -22,6 +31,12 @@ const reducer = combineReducers({
   // userDelete: userDeleteReducer,
   // userUpdate: userUpdateReducer,
   employeeList: employeeListReducer,
+  createReport: createReportReducer,
+  getReportDetails: getReportDetailsReducer,
+  listReportsByEmployee: listReportsByEmployeeReducer,
+  updateReport: updateReportReducer,
+  adminUpdateReport: adminUpdateReportReducer,
+  deleteReport: deleteReportReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
