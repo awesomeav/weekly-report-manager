@@ -1,118 +1,110 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { register } from '../actions/userActions'
 
-// import './register.css'
 
-const Signup = ({ history }) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [message, setMessage] = useState(null)
+const theme = createTheme();
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const userRegister = useSelector((state) => state.userRegister)
-  const { loading, error, userInfo } = userRegister
-
-  // const redirect = location.search ? location.search.split('=')[1] : '/'
-
-  useEffect(() => {
-    if (userInfo) {
-      setMessage('Registered successfully! Redirecting to the home page...')
-      navigate('/')
-    }
-  }, [userInfo, navigate])
-
-  const signupHandler = (event) => {
-    event.preventDefault()
-
-    if (password !== confirmPassword) {
-      setMessage('Passwords do not match')
-      alert('Passwords do not match')
-    } else {
-      // dispatch the register action
-      dispatch(register(name, email, password))
-    }
-  }
+export default function SignUp() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
 
   return (
-    <div className='container'>
-      <p>.</p>
-      <p>.</p>
-      <div className='app-wrapper'>
-        <div>
-          <h1 className='title'>Signup</h1>
-        </div>
-        <form className='form-wrapper'>
-          <div className='name'>
-            {/* NAME */}
-            <label className='label'>Full Name</label>
-            <input
-              className='input'
-              type='text'
-              name='name'
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-            />
-          </div>
-          {/* Email */}
-          <div className='email'>
-            <label className='label'>Email</label>
-            <input
-              className='input'
-              type='email'
-              name='email'
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </div>
-          {/* Password */}
-          <div className='password'>
-            <label className='label'>Password</label>
-            <input
-              className='input'
-              type='text'
-              name='password'
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
-          {/* Password */}
-          <div className='password'>
-            <label className='label'>Confirm Password</label>
-            <input
-              className='input'
-              type='text'
-              name='confirmPassword'
-              value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
-            />
-          </div>
-
-          <div className='password'>
-            
-            <label for="cars">   Choose a roles:</label>
-          
-         <select id="roles">
-         <option value="default">   </option>
-         <option value="webd">Web developer</option>
-         <option value="automation">Automation </option>
-         </select>
-          </div>
-          <div>
-            <button className='submit' onClick={signupHandler}>
-              Signup
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  )
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 15,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} >
+                <TextField
+                  autoComplete="given-name"
+                  name="fullName"
+                  required
+                  fullWidth
+                  id="fullName"
+                  label="Full Name"
+                  autoFocus
+                />
+              </Grid>
+              
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="Confirm password"
+                  label="Confirm password"
+                  type="password"
+                  id="Confirm password"
+                  
+                />
+              </Grid>
+              
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            </Box>
+        </Box>
+        
+      </Container>
+    </ThemeProvider>
+  );
 }
-
-export default Signup
